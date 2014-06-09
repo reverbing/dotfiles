@@ -13,6 +13,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 alias ls='ls -G'
 alias la='ls -a'
+alias ll='ls -l'
 alias vi='vim'
 # alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias javac='javac -encoding UTF-8'
