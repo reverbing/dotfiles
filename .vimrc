@@ -27,6 +27,7 @@ NeoBundle 'Shougo/vimproc.vim', {
             \  },
             \}
 NeoBundle 'Shougo/vimfiler'
+NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'itchyny/lightline.vim'
@@ -40,7 +41,6 @@ NeoBundle 'kevinw/pyflakes-vim'
 NeoBundle 'aharisu/vim_goshrepl'
 NeoBundle 'aharisu/vim-gdev'
 NeoBundle 'amdt/vim-niji'
-NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 NeoBundle 'tpope/vim-fugitive'
 " カラースキーム
 NeoBundle 'tomasr/molokai'
@@ -262,16 +262,16 @@ set wrapscan
 " ### 括弧&クォーテーションの自動補完設定
 " ##########################################################################################
 "
-inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-vnoremap { "zdi^V{<C-R>z}<ESC>
-vnoremap [ "zdi^V[<C-R>z]<ESC>
-vnoremap ( "zdi^V(<C-R>z)<ESC>
-vnoremap " "zdi^V"<C-R>z^V"<ESC>
-vnoremap ' "zdi'<C-R>z'<ESC>
+" inoremap { {}<LEFT>
+" inoremap [ []<LEFT>
+" inoremap ( ()<LEFT>
+" inoremap " ""<LEFT>
+" inoremap ' ''<LEFT>
+" vnoremap { "zdi^V{<C-R>z}<ESC>
+" vnoremap [ "zdi^V[<C-R>z]<ESC>
+" vnoremap ( "zdi^V(<C-R>z)<ESC>
+" vnoremap " "zdi^V"<C-R>z^V"<ESC>
+" vnoremap ' "zdi'<C-R>z'<ESC>
 
 
 
@@ -303,6 +303,7 @@ function! s:unite_my_settings()
   imap <silent><buffer> <ESC><ESC> <ESC>q
 endfunction
 
+
 " ##########################################################################################
 " ### VimFilerの設定
 " ##########################################################################################
@@ -313,6 +314,13 @@ endfunction
 " let g:vimfiler_as_default_explorer = 1
 " セーフモードをOffに
 " let g:vimfiler_safe_mode_by_default = 0
+
+
+" ##########################################################################################
+" ### VimShellの設定
+" ##########################################################################################
+
+nnoremap <silent> ,vs :<C-u>VimShell<CR>
 
 " ##########################################################################################
 " ### indent-guides.vimの設定
@@ -436,19 +444,6 @@ elseif neobundle#is_installed('neocomplcache.vim')
 endif
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-n>" : "\<S-TAB>"
-
-
-" ##########################################################################################
-" ### vim-latexの設定
-" ##########################################################################################
-
-" filetype plugin on
-" let tex_flavor = 'latex'
-" set grepprg=grep\ -nH\ $*
-" set shellslash
-" let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
-" let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
-" let g:Tex_FormatDependency_pdf = 'dvi,pdf'
 
 
 " ##########################################################################################
