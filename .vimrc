@@ -97,6 +97,7 @@ syntax on
 autocmd Colorscheme * highlight Preproc ctermfg=148
 autocmd Colorscheme * highlight Function ctermfg=148
 autocmd Colorscheme * highlight Exception ctermfg=148
+autocmd Colorscheme * highlight Visual ctermfg=Yellow
 " コメントの色をctermfg=210
 autocmd ColorScheme * highlight Comment ctermfg=244
 " カラースキーム
