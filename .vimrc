@@ -93,13 +93,15 @@ set listchars=tab:>-,trail:･,extends:>,precedes:<,nbsp:%,eol:↲
 set t_Co=256
 " シンタックスハイライト
 syntax on
-" PreprocとFunctionとExceptionの色を148に(154,112もあり)
+" PreprocとFunctionとExceptionの色を設定:148(154,112)
 autocmd Colorscheme * highlight Preproc ctermfg=148
 autocmd Colorscheme * highlight Function ctermfg=148
 autocmd Colorscheme * highlight Exception ctermfg=148
 autocmd Colorscheme * highlight Visual ctermfg=Yellow
-" コメントの色をctermfg=210
+" commentの色を設定:244(210)
 autocmd ColorScheme * highlight Comment ctermfg=244
+" ターミナルでの透過設定をvimに反映
+highlight Normal ctermbg=None
 " カラースキーム
 colorschem molokai
 " :SyntaxInfoでカーソルがある文のカラーリング設定を確認
