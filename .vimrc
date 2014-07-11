@@ -1,13 +1,38 @@
 " ###############################################################################
 " ### neobundleの設定
 " ###############################################################################
+"
+let s:noplugin = 0
+let s:bundle_root = expand('~/.vim/bundle')
+let s:neobundle_root = s:bundle_root . '/neobundle.vim'
+if !isdirectory(s:neobundle_root) || v:version < 702
+    let s:noplugin = 1
+else
+    if has('vim_starting')
+        execute "set runtimepath+=" . s:neobundle_root
+    endif
+    call neobundle#rc(s:bundle_root)
 
-set nocompatible
-filetype off
-if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    NeoBundleFetch 'Shougo/neobundle.vim'
+
+    NeoBundle "Shougo/vimproc", {
+        \ "build": {
+        \   "windows"   : "make -f make_mingw32.mak",
+        \   "cygwin"    : "make -f make_cygwin.mak",
+        \   "mac"       : "make -f make_mac.mak",
+        \   "unix"      : "make -f make_unix.mak",
+        \ }}
+    NeoBundleCheck
 endif
-call neobundle#rc(expand('~/.vim/bundle/')) " プラグインをインストールするディレクトリを指定
+
+filetype plugin indent on
+
+" set nocompatible
+" filetype off
+" if has('vim_starting')
+    " set runtimepath+=~/.vim/bundle/neobundle.vim/
+" endif
+" call neobundle#rc(expand('~/.vim/bundle/')) " プラグインをインストールするディレクトリを指定
 
 
 " ################################################################################
@@ -15,17 +40,14 @@ call neobundle#rc(expand('~/.vim/bundle/')) " プラグインをインストー�
 " ################################################################################
 "
 " NeoBundle 'Shougo/neocomplcache'
-NeoBundle has('lua') ? 'Shougo/neocomplete.vim' : 'Shougo/neocomplcache'
-NeoBundle 'Shougo/unite.vim'
+NeoBundleLazy has('lua') ? 'Shougo/neocomplete.vim' : 'Shougo/neocomplcache',{
+    \ "autoload": {"insert":1}
+    \ }
+NeoBundleLazy 'Shougo/unite.vim', {
+    \ "autoload": {
+    \ "commands": ["unite", "UniteWithBufferDir"]
+    \ }}
 NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/vimproc.vim', {
-            \ 'build' : {
-            \    'windows' : 'make -f make_mingw32.mak',
-            \    'cygwin'  : 'make -f make_cygwin.mak',
-            \    'mac'     : 'make -f make_mac.mak',
-            \    'unix'    : 'make -f make_unix.mak',
-            \  },
-            \}
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
@@ -36,7 +58,22 @@ NeoBundle 'vim-scripts/buftabs'
 NeoBundle 'mattn/calendar-vim'
 NeoBundle 'YankRing.vim'
 NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'davidhalter/jedi-vim'
+NeoBundleLazy "lambdalisue/vim-django-support", {
+    \ "autoload": {
+    \ "filetypes": ["python", "python3", "djangohtml"]
+    \ }}
+NeoBundleLazy "jmcantrell/vim-virtualenv", {
+    \ "autoload": {
+    \ "filetypes": ["python", "python3", "djangohtml"]
+    \ }}
+NeoBundleLazy 'davidhalter/jedi-vim', {
+    \ "autoload": {
+    \ "filetypes": ["python", "python3", "djangohtml"],
+    \ },
+    \ "build": {
+    \   "mac": "pip install jedi",
+    \   "unix": "pip install jedi"
+    \ }}
 NeoBundle 'kevinw/pyflakes-vim'
 NeoBundle 'aharisu/vim_goshrepl'
 NeoBundle 'aharisu/vim-gdev'
@@ -51,8 +88,8 @@ NeoBundle 'inkpot'
 NeoBundle 'newspaper.vim'
 
 
-filetype plugin on
-filetype indent on
+" filetype plugin on
+" filetype indent on
 
 " ################################################################################
 " ### helpの設定
@@ -84,6 +121,11 @@ set laststatus=2
 set list
 " 不可視文字の表示設定
 set listchars=tab:>-,trail:･,extends:>,precedes:<,nbsp:%,eol:↲
+" Shift + Cursor でウィンドウサイズを変更
+nnoremap <S-Left>  <C-w><<CR>
+nnoremap <S-Right> <C-w>><CR>
+nnoremap <S-Up>    <C-w>-<CR>
+nnoremap <S-Down>  <C-w>+<CR>
 
 
 " ###################################################################################
@@ -229,6 +271,10 @@ set imdisable
 nnoremap <Space>, :<C-u>edit $MYVIMRC<Enter>
 " <Space>s. で.vimrcのリロード
 nnoremap <Space>. :<C-u>source $MYVIMRC<Enter>
+" InsertModeでjj -> <ESC>
+inoremap jj <ESC>
+" 保管時にScratchウィンドウを表示しない
+set completeopt=menuone
 
 
 " #########################################################################################
@@ -387,9 +433,9 @@ vmap ,, <Plug>NERDCommenterToggle
 " ##########################################################################################
 
 " Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 imap <expr><C-l>
@@ -405,12 +451,23 @@ endif
 " ##########################################################################################
 " ### jediの設定
 " ##########################################################################################
+"
+let s:hooks = neobundle#get_hooks("jedi-vim")
+function! s:hooks.on_source(bundle)
+    let g:jedi#auto_initialization = 0
+    let g:jedi#auto_vim_configuration = 0
+    let g:jedi#popup_select_first = 0
+    let g:jedi#completions_enabled = 0
+    let g:jedi#show_call_signatures = 0
+    let g:jedi#show_function_definition = 0
+endfunction
 
-let g:jedi#auto_initialization = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#popup_select_first = 0
-let g:jedi#completions_enabled = 0
-let g:jedi#show_call_signatures = 0
+" let g:jedi#auto_initialization = 0
+" let g:jedi#popup_on_dot = 0
+" let g:jedi#auto_vim_configuration = 0
+" let g:jedi#popup_select_first = 0
+" let g:jedi#completions_enabled = 0
+" let g:jedi#show_call_signatures = 0
 
 autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#auto_vim_configuration = 0
@@ -426,13 +483,16 @@ let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 "
 if neobundle#is_installed('neocomplete.vim')
     "neocomplete用設定
+    let s:hooks = neobundle#get_hooks("neocomplete.vim")
+    let g:acp_enableAtStartUp = 0
     let g:neocomplete#enable_at_startup = 1
     let g:neocomplete#enable_ignore_case = 1
     let g:neocomplete#enable_smart_case = 1
     if !exists('g:neocomplete#keyword_patterns')
         let g:neocomplete#keyword_patterns = {}
     endif
-    let g:neocomplete#keyword_patterns._ = '\h\w*'
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+    let g:neocomplete#enable_camel_case = 1
 elseif neobundle#is_installed('neocomplcache.vim')
     "neocomplcache用設定
     let g:neocomplcache#enable_at_startup = 1
@@ -447,6 +507,7 @@ elseif neobundle#is_installed('neocomplcache.vim')
 endif
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-n>" : "\<S-TAB>"
+
 
 
 " ##########################################################################################
@@ -492,7 +553,7 @@ let lisp_rainbow = 1
 " ### Gaucheの設定
 " ##########################################################################################
 
-let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnum:]+*/@$_:=.!?-]*"
+" let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnum:]+*/@$_:=.!?-]*"
 
 autocmd FileType scheme set nocindent
 autocmd FileType scheme set lisp
