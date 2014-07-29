@@ -58,22 +58,6 @@ NeoBundle 'vim-scripts/buftabs'
 NeoBundle 'mattn/calendar-vim'
 NeoBundle 'YankRing.vim'
 NeoBundle 'scrooloose/nerdcommenter'
-NeoBundleLazy "lambdalisue/vim-django-support", {
-    \ "autoload": {
-    \ "filetypes": ["python", "python3", "djangohtml"]
-    \ }}
-NeoBundleLazy "jmcantrell/vim-virtualenv", {
-    \ "autoload": {
-    \ "filetypes": ["python", "python3", "djangohtml"]
-    \ }}
-NeoBundleLazy 'davidhalter/jedi-vim', {
-    \ "autoload": {
-    \ "filetypes": ["python", "python3", "djangohtml"],
-    \ },
-    \ "build": {
-    \   "mac": "pip install jedi",
-    \   "unix": "pip install jedi"
-    \ }}
 NeoBundle 'kevinw/pyflakes-vim'
 NeoBundle 'aharisu/vim_goshrepl'
 NeoBundle 'aharisu/vim-gdev'
