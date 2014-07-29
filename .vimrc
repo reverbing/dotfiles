@@ -48,6 +48,7 @@ NeoBundleLazy 'Shougo/unite.vim', {
     \ "commands": ["unite", "UniteWithBufferDir"]
     \ }}
 NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
@@ -484,7 +485,7 @@ if neobundle#is_installed('neocomplete.vim')
     endif
     let g:neocomplete#keyword_patterns['default'] = '\h\w*'
     let g:neocomplete#enable_camel_case = 1
-elseif neobundle#is_installed('neocomplcache.vim')
+elseif neobundle#is_installed("neocomplcache.vim")
     "neocomplcache用設定
     let g:neocomplcache#enable_at_startup = 1
     let g:neocomplcache#enable_ignore_case = 1
