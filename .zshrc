@@ -1,12 +1,12 @@
 ############################################################################################
 ### PATH
 ############################################################################################
-export PATH=/usr/local/bin:/usr/texbin:$PATH
+# export PATH=/usr/local/bin:/usr/texbin:$PATH
 
 # export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
-export WORKON_HOME=~/.virtualenvs
+# export WORKON_HOME=~/.virtualenvs
 
-source /usr/local/bin/virtualenvwrapper.sh
+# source /usr/local/bin/virtualenvwrapper.sh
 
 
 ############################################################################################
@@ -27,6 +27,7 @@ alias gosh='rlwrap gosh'
 ### Language
 ############################################################################################
 
+# 文字コードをUTF-8に設定
 export LANG=ja_JP.UTF-8
 export LESSCHARSET=UTF-8
 
@@ -37,8 +38,6 @@ export LESSCHARSET=UTF-8
 #
 # エディタをvimに設定
 export EDITOR=vim
-# 文字コードをUTF-8に設定
-export LANG=ja_JP.UTF-8
 # KCODEをUTF-8に設定
 export KCODE=u
 
