@@ -1,12 +1,14 @@
 ############################################################################################
 ### PATH
 ############################################################################################
-# export PATH=/usr/local/bin:/usr/texbin:$PATH
-
-# export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
-# export WORKON_HOME=~/.virtualenvs
-
-# source /usr/local/bin/virtualenvwrapper.sh
+#
+case {$OSTYPE} in
+    darwin*)
+        export PATH=/usr/local/bin:/usr/texbin:$PATH
+        export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+        export WORKON_HOME=~/.virtualenvs
+        source /usr/local/bin/virtualenvwrapper.sh
+esac
 
 
 ############################################################################################
