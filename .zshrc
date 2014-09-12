@@ -1,19 +1,21 @@
 ############################################################################################
 ### PATH
 ############################################################################################
-export PATH=/usr/local/bin:$PATH
 
-# export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
-export WORKON_HOME=~/.virtualenvs
-
-source /usr/local/bin/virtualenvwrapper.sh
+case {$OSTYPE} in
+    darwin*)
+        export PATH=/usr/local/bin:/usr/texbin:$PATH
+        export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+        export WORKON_HOME=~/.virtualenvs
+        source /usr/local/bin/virtualenvwrapper.sh
+esac
 
 
 ############################################################################################
 ### Alias
 ############################################################################################
 
-alias ls='ls -G'
+alias ls='ls --color=auto'
 alias la='ls -a'
 alias ll='ls -l'
 alias vi='vim'
@@ -27,6 +29,7 @@ alias gosh='rlwrap gosh'
 ### Language
 ############################################################################################
 
+# 文字コードをUTF-8に設定
 export LANG=ja_JP.UTF-8
 export LESSCHARSET=UTF-8
 
@@ -37,8 +40,6 @@ export LESSCHARSET=UTF-8
 #
 # エディタをvimに設定
 export EDITOR=vim
-# 文字コードをUTF-8に設定
-export LANG=ja_JP.UTF-8
 # KCODEをUTF-8に設定
 export KCODE=u
 
@@ -110,5 +111,5 @@ colors
 
 PROMPT="%{${fg[white]}%}[%n@%m]$ %{${reset_color}%}"
 PROMPT2="%{${fg[white]}%}[%n@%m]> %{${reset_color}%}"
-RPROMPT="%{${fg[white]}%}%/ %{${reset_color}%}"
+RPROMPT="%{${fg[white]}%}%~ %{${reset_color}%}"
 SPROMPT="%{${fg[white]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
