@@ -1,7 +1,7 @@
 ############################################################################################
 ### PATH
 ############################################################################################
-export PATH=/usr/local/bin:/usr/texbin:$PATH
+export PATH=/usr/local/bin:$PATH
 
 # export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
 export WORKON_HOME=~/.virtualenvs
