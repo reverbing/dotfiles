@@ -57,7 +57,6 @@ NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'vim-scripts/buftabs'
 NeoBundle 'mattn/calendar-vim'
 NeoBundle 'YankRing.vim'
 NeoBundle 'scrooloose/nerdcommenter'
@@ -68,11 +67,6 @@ NeoBundle 'amdt/vim-niji'
 NeoBundle 'tpope/vim-fugitive'
 " カラースキーム
 NeoBundle 'tomasr/molokai'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'mirodark'
-NeoBundle 'badwolf'
-NeoBundle 'inkpot'
-NeoBundle 'newspaper.vim'
 
 
 " filetype plugin on
@@ -404,18 +398,6 @@ vmap ,, <Plug>NERDCommenterToggle
 
 
 " ##########################################################################################
-" ### buftabsの設定
-" ##########################################################################################
-
-" バッファタブにパスを省略してファイル名のみ表示する
-" let g:buftabs_only_basename = 1
-" バッファタブをステータスライン内に表示する
-" let g:buftabs_in_statusline = 1
-" 現在のバッファをハイライトする
-" let g:buftabs_active_highlight_group = 'Visual'
-
-
-" ##########################################################################################
 " ### neosnippetの設定
 " ##########################################################################################
 
@@ -547,7 +529,7 @@ let lisp_rainbow = 1
 " ### Gaucheの設定
 " ##########################################################################################
 
-" let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnum:]+*/@$_:=.!?-]*"
+let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnum:]+*/@$_:=.!?-]*"
 
 autocmd FileType scheme set nocindent
 autocmd FileType scheme set lisp
