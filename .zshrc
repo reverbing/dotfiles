@@ -19,6 +19,7 @@ alias ls='ls --color=auto'
 alias la='ls -a'
 alias ll='ls -l'
 alias vi='vim'
+alias tmux='tmux -2'
 # alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias javac='javac -encoding UTF-8'
 alias java='java -Dfile.encoding=UTF-8'
@@ -60,7 +61,7 @@ setopt correct
 # ファイルを色付け表示
 export LSCOLORS=gxfxcxdxbxegedabagacad
 # 補完時の色の設定
-export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+export LS_COLORS='di=01;36:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 # 補完候補の色付け
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
