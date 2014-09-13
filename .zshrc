@@ -1,13 +1,17 @@
 ############################################################################################
-### PATH
+### OS
 ############################################################################################
 
-case {$OSTYPE} in
+case ${OSTYPE} in
     darwin*)
         export PATH=/usr/local/bin:/usr/texbin:$PATH
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
         export WORKON_HOME=~/.virtualenvs
         source /usr/local/bin/virtualenvwrapper.sh
+        ;;
+    linux*)
+        export EDITOR=vim
+        ;;
 esac
 
 
@@ -15,7 +19,6 @@ esac
 ### Alias
 ############################################################################################
 
-alias ls='ls --color=auto'
 alias la='ls -a'
 alias ll='ls -l'
 alias vi='vim'
@@ -38,9 +41,7 @@ export LESSCHARSET=UTF-8
 ############################################################################################
 ### General Setting
 ############################################################################################
-#
-# エディタをvimに設定
-export EDITOR=vim
+
 # KCODEをUTF-8に設定
 export KCODE=u
 
