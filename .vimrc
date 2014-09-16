@@ -273,7 +273,7 @@ set fileencoding=utf-8
 " ##########################################################################################
 "
 " 補完の際、大文字小文字の区別をしない
-set infercase
+" set infercase
 " 検索の際、小文字と大文字の区別をしない
 set ignorecase
 " ただし、大文字も含めた場合は区別をする
@@ -375,6 +375,7 @@ hi IndentGuidesEven ctermbg=darkgray
 " ##########################################################################################
 " ### lightline.vimの設定
 " ##########################################################################################
+"
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
@@ -382,7 +383,7 @@ let g:lightline = {
 
 " ##########################################################################################
 " ### YankRingの設定
-" ###########################################################################################
+" ##########################################################################################
 
 let g:yankring_history_dir = '~/.vim/history'
 let g:yankring_history_file = '.yankring_history'
@@ -420,7 +421,7 @@ if has('conceal')
 endif
 
 " Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
+" let g:neosnippet#enable_snipmate_compatibility = 1
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/neosnippets'
 
@@ -529,7 +530,7 @@ let lisp_rainbow = 1
 " ### Gaucheの設定
 " ##########################################################################################
 
-let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnum:]+*/@$_:=.!?-]*"
+" let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnum:]+*/@$_:=.!?-]*"
 
 autocmd FileType scheme set nocindent
 autocmd FileType scheme set lisp
