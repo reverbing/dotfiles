@@ -52,8 +52,8 @@ NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/unomru.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
@@ -433,18 +433,11 @@ let s:hooks = neobundle#get_hooks("jedi-vim")
 function! s:hooks.on_source(bundle)
     let g:jedi#auto_initialization = 0
     let g:jedi#auto_vim_configuration = 0
-    let g:jedi#popup_select_first = 0
+    let g:jedi#popup_select_first = 1
     let g:jedi#completions_enabled = 0
     let g:jedi#show_call_signatures = 0
     let g:jedi#show_function_definition = 0
 endfunction
-
-" let g:jedi#auto_initialization = 0
-" let g:jedi#popup_on_dot = 0
-" let g:jedi#auto_vim_configuration = 0
-" let g:jedi#popup_select_first = 0
-" let g:jedi#completions_enabled = 0
-" let g:jedi#show_call_signatures = 0
 
 autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#auto_vim_configuration = 0
