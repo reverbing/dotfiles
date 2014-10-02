@@ -428,19 +428,13 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/neosnippe
 " ##########################################################################################
 " ### jediの設定
 " ##########################################################################################
-"
-let s:hooks = neobundle#get_hooks("jedi-vim")
-function! s:hooks.on_source(bundle)
-    let g:jedi#auto_initialization = 0
-    let g:jedi#auto_vim_configuration = 0
-    let g:jedi#popup_select_first = 1
-    let g:jedi#completions_enabled = 0
-    let g:jedi#show_call_signatures = 0
-    let g:jedi#show_function_definition = 0
-endfunction
+
+" docstringを非表示に
+autocmd FileType python setlocal completeopt-=preview
 
 autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#auto_vim_configuration = 0
+let g:jedi#completions_enabled = 0
 if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns = {}
 endif
