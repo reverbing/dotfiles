@@ -6,9 +6,11 @@ case ${OSTYPE} in
     darwin*)
         export PATH=/usr/local/bin:/usr/texbin:$PATH
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+        export LANG=ja_JP.UTF-8
         ;;
     linux*)
         export EDITOR=vim
+        export LANG=en_US.UTF-8
         ;;
 esac
 
@@ -32,7 +34,6 @@ alias gosh='rlwrap gosh'
 ############################################################################################
 
 # 文字コードをUTF-8に設定
-export LANG=ja_JP.UTF-8
 export LESSCHARSET=UTF-8
 
 
