@@ -1,5 +1,5 @@
 ############################################################################################
-### OS
+### Environmental variables
 ############################################################################################
 
 case ${OSTYPE} in
@@ -19,11 +19,15 @@ esac
 ### Alias
 ############################################################################################
 
+case ${OSTYPE} in
+    linux*)
+        alias ls='ls --color=always'
+        ;;
+esac
 alias la='ls -a'
 alias ll='ls -l'
 alias vi='vim'
 alias tmux='tmux -2'
-# alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias javac='javac -encoding UTF-8'
 alias java='java -Dfile.encoding=UTF-8'
 alias gosh='rlwrap gosh'
