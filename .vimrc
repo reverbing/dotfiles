@@ -1,38 +1,20 @@
 " ###############################################################################
 " ### neobundleの設定
 " ###############################################################################
-"
-let s:noplugin = 0
-let s:bundle_root = expand('~/.vim/bundle')
-let s:neobundle_root = s:bundle_root . '/neobundle.vim'
-if !isdirectory(s:neobundle_root) || v:version < 702
-    let s:noplugin = 1
-else
-    if has('vim_starting')
-        execute "set runtimepath+=" . s:neobundle_root
-    endif
-    call neobundle#rc(s:bundle_root)
 
-    NeoBundleFetch 'Shougo/neobundle.vim'
-
-    NeoBundle "Shougo/vimproc", {
-        \ "build": {
-        \   "windows"   : "make -f make_mingw32.mak",
-        \   "cygwin"    : "make -f make_cygwin.mak",
-        \   "mac"       : "make -f make_mac.mak",
-        \   "unix"      : "make -f make_unix.mak",
-        \ }}
-    NeoBundleCheck
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
+
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+call neobundle#end()
 
 filetype plugin indent on
 
-" set nocompatible
-" filetype off
-" if has('vim_starting')
-    " set runtimepath+=~/.vim/bundle/neobundle.vim/
-" endif
-" call neobundle#rc(expand('~/.vim/bundle/')) " プラグインをインストールするディレクトリを指定
+NeoBundleCheck
 
 
 " ################################################################################
@@ -47,6 +29,14 @@ NeoBundleLazy 'Shougo/unite.vim', {
     \ "autoload": {
     \ "commands": ["unite", "UniteWithBufferDir"]
     \ }}
+NeoBundle "Shougo/vimproc", {
+        \ "build": {
+        \   "windows"   : "make -f make_mingw32.mak",
+        \   "cygwin"    : "make -f make_cygwin.mak",
+        \   "mac"       : "make -f make_mac.mak",
+        \   "unix"      : "make -f make_unix.mak",
+        \ }}
+
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimfiler'
@@ -69,9 +59,6 @@ NeoBundle 'tpope/vim-fugitive'
 " カラースキーム
 NeoBundle 'tomasr/molokai'
 
-
-" filetype plugin on
-" filetype indent on
 
 " ################################################################################
 " ### helpの設定
@@ -518,7 +505,7 @@ let lisp_rainbow = 1
 " ### Gaucheの設定
 " ##########################################################################################
 
-" let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnum:]+*/@$_:=.!?-]*"
+let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnum:]+*/@$_:=.!?-]*"
 
 autocmd FileType scheme set nocindent
 autocmd FileType scheme set lisp
