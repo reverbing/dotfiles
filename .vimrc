@@ -53,7 +53,6 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'kevinw/pyflakes-vim'
 NeoBundle 'aharisu/vim_goshrepl'
-NeoBundle 'aharisu/vim-gdev'
 NeoBundle 'amdt/vim-niji'
 NeoBundle 'tpope/vim-fugitive'
 " カラースキーム
