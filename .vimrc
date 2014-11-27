@@ -29,6 +29,13 @@ NeoBundleLazy 'Shougo/unite.vim', {
     \ "autoload": {
     \ "commands": ["unite", "UniteWithBufferDir"]
     \ }}
+NeoBundleLazy 'vim-jp/cpp-vim', {
+            \ 'autoload' : {'filetypes' : 'cpp'}
+            \ }
+NeoBundleLazy 'osyo-manga/vim-marching', {
+            \ 'depends' : ['Shougo/vimproc.vim', 'osyo-manga/vim-reunions'],
+            \ 'autoload' : {'filetypes' : ['c', 'cpp']}
+            \}
 NeoBundle "Shougo/vimproc", {
         \ "build": {
         \   "windows"   : "make -f make_mingw32.mak",
@@ -36,7 +43,6 @@ NeoBundle "Shougo/vimproc", {
         \   "mac"       : "make -f make_mac.mak",
         \   "unix"      : "make -f make_unix.mak",
         \ }}
-
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimfiler'
@@ -442,6 +448,8 @@ if neobundle#is_installed('neocomplete.vim')
     if !exists('g:neocomplete#keyword_patterns')
         let g:neocomplete#keyword_patterns = {}
     endif
+    let g:neocomplete#force_omni_input_patterns.cpp =
+                \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
     let g:neocomplete#keyword_patterns['default'] = '\h\w*'
     let g:neocomplete#enable_camel_case = 1
 elseif neobundle#is_installed("neocomplcache.vim")
@@ -460,6 +468,19 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-n>" : "\<S-TAB>"
 
 
+" ##########################################################################################
+" ### marchingの設定
+" ##########################################################################################
+
+let g:marching#clang_command#options = {
+            \ 'cpp' : '-std=gnu++1y'
+            \}
+
+" neocompleteと併用する
+let g:marching_enable_neocomplete = 1
+" 処理のタイミング
+set updatetime=200
+
 
 " ##########################################################################################
 " ### C言語の設定
@@ -467,6 +488,16 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-n>" : "\<S-TAB>"
 "
 " 標準的なC言語のインデントに従う
 set cindent
+
+
+" ##########################################################################################
+" ### C++の設定
+" ##########################################################################################
+
+augroup cpp-path
+    autocmd!
+    autocmd FileType cpp setlocal path=.,/usr/include/,/usr/local/include
+augroup END
 
 
 " ##########################################################################################
