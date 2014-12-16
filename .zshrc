@@ -31,6 +31,7 @@ alias tmux='tmux -2'
 alias javac='javac -encoding UTF-8'
 alias java='java -Dfile.encoding=UTF-8'
 alias gosh='rlwrap gosh'
+alias ocaml='rlwrap ocaml'
 
 
 ############################################################################################
