@@ -63,7 +63,8 @@ NeoBundle 'amdt/vim-niji'
 NeoBundle 'tpope/vim-fugitive'
 " カラースキーム
 NeoBundle 'tomasr/molokai'
-
+NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'sjl/badwolf'
 
 " ################################################################################
 " ### helpの設定
