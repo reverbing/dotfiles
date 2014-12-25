@@ -86,12 +86,16 @@ set number
 set ruler
 " 対応する括弧をハイライト
 set showmatch
+" 対応する括弧をハイライトする時間 (n * 0.1[s])
+set matchtime=3
 " ウィンドウの幅より長い行は折り返され、次の行に続けて表示する
 set wrap
 " コマンドを画面の最下行に表示
 set showcmd
 " ステータス行を常に表示
 set laststatus=2
+" 補完メニューの高さ
+set pumheight=10
 " 不可視文字を表示
 set list
 " 不可視文字の表示設定
@@ -248,7 +252,7 @@ nnoremap <Space>, :<C-u>edit $MYVIMRC<Enter>
 nnoremap <Space>. :<C-u>source $MYVIMRC<Enter>
 " InsertModeでjj -> <ESC>
 inoremap jj <ESC>
-" 保管時にScratchウィンドウを表示しない
+" 補完時にScratchウィンドウを表示しない
 set completeopt=menuone
 
 
@@ -297,6 +301,17 @@ set wrapscan
 " vnoremap " "zdi^V"<C-R>z^V"<ESC>
 " vnoremap ' "zdi'<C-R>z'<ESC>
 
+
+" ##########################################################################################
+" ### その他の設定
+" ##########################################################################################
+"
+" Yで行末まで削除
+nnoremap Y y$
+" +でカーソル下の数値をインクリメント
+nnoremap + <C-a>
+" -でカーソル下の数値をデクリメント
+nnoremap - <C-x>
 
 
 " ++++++++++++++++++++++++++++++++ 各種プラグインの設定 ++++++++++++++++++++++++++++++++++++
