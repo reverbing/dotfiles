@@ -119,3 +119,6 @@ PROMPT="%{${fg[white]}%}[%n@%m]$ %{${reset_color}%}"
 PROMPT2="%{${fg[white]}%}[%n@%m]> %{${reset_color}%}"
 RPROMPT="%{${fg[white]}%}%~ %{${reset_color}%}"
 SPROMPT="%{${fg[white]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
+
+# OPAM configuration
+. /Users/reverbing/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

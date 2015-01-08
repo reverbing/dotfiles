@@ -558,3 +558,16 @@ autocmd FileType scheme set lisp
 autocmd FileType scheme set showmatch
 " <Bslash>g でGaucheファイルを評価し、GoauchREPLバッファを開く
 nnoremap <Leader>g :<C-u>GoshREPLWithBuffer<Enter>
+
+
+" ##########################################################################################
+" ### OCamlの設定
+" ##########################################################################################
+"
+" Merlinとの連携
+let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+execute "set rtp+=" . g:opamshare . "/merlin/vimbufsync"
+
+" ocp-indentとの連携
+autocmd FileType ocaml execute ":source " . g:opamshare . "/vim/syntax/ocp-indent.vim"
