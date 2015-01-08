@@ -1,0 +1,16 @@
+(* Added by OPAM. *)
+let () =
+  try Topdirs.dir_directory (Sys.getenv "OCAML_TOPLEVEL_PATH")
+  with Not_found -> ()
+;;
+
+(* 日本語設定 *)
+let printer ppf = Format.fprintf ppf "\"%s\"";;
+#install_printer printer
+
+(* Core.Stdを呼び出す準備 *)
+#use "topfind";;
+#thread;;
+#camlp4o;;
+#require "core.top";;
+#require "core.syntax";;
