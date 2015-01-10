@@ -182,10 +182,10 @@ set whichwrap=b,s,h,l,,[,]
 " インデントの削除を可能に、行の先頭で前の行の改行を削除を可能に、Ctrl+Wで入力した単語以外も削除可能に
 set backspace=indent,eol,start
 " ウィンドウ間を移動
-nnoremap <c-j> <c-w>j
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-nnoremap <c-k> <c-w>k
+" nnoremap <c-j> <c-w>j
+" nnoremap <c-h> <c-w>h
+" nnoremap <c-l> <c-w>l
+" nnoremap <c-k> <c-w>k
 
 " gcで最後に変更したテキストを選択
 nnoremap gc `[v`]
@@ -497,6 +497,16 @@ let g:marching_enable_neocomplete = 1
 " 処理のタイミング
 set updatetime=200
 
+
+" ##########################################################################################
+" ### globalの設定
+" ##########################################################################################
+
+map <C-g> :Gtags
+map <C-i> :Gtags -f %<CR>
+map <C-j> :GtagsCursor<CR>
+map <C-n> :cn<CR>
+map <C-p> :cp<CR>
 
 " ##########################################################################################
 " ### C言語の設定
