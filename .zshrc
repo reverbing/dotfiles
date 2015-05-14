@@ -120,5 +120,22 @@ PROMPT2="%{${fg[white]}%}[%n@%m]> %{${reset_color}%}"
 RPROMPT="%{${fg[white]}%}%~ %{${reset_color}%}"
 SPROMPT="%{${fg[white]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
 
+
+
+#############################################################################################
+### pyenv-virtualenv
+#############################################################################################
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)";
+fi
+export PYENV_ROOT=/usr/local/var/pyenv
+
+if which pyenv-virtualenv > /dev/null; then
+    eval "$(pyenv virtualenv-init -)";
+fi
+
+#############################################################################################
+### OPAM
+#############################################################################################
 # OPAM configuration
 . /Users/reverbing/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
