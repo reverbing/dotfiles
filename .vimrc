@@ -182,10 +182,10 @@ set whichwrap=b,s,h,l,,[,]
 " インデントの削除を可能に、行の先頭で前の行の改行を削除を可能に、Ctrl+Wで入力した単語以外も削除可能に
 set backspace=indent,eol,start
 " ウィンドウ間を移動
-" nnoremap <c-j> <c-w>j
-" nnoremap <c-h> <c-w>h
-" nnoremap <c-l> <c-w>l
-" nnoremap <c-k> <c-w>k
+nnoremap <c-j> <c-w>j
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-k> <c-w>k
 
 " gcで最後に変更したテキストを選択
 nnoremap gc `[v`]
@@ -229,7 +229,7 @@ set backup
 " 指定したディレクトリに保存したファイルの前のバージョンを保存
 set backupdir=~/.vim/vimbackup"
 " スワップファイルを作成する
-" set swapfile
+set swapfile
 " 指定したディレクトリにスワップファイルを作成する
 " set directory=~/.vim/vimswap
 
@@ -502,11 +502,9 @@ set updatetime=200
 " ### globalの設定
 " ##########################################################################################
 
-map <C-g> :Gtags
-map <C-i> :Gtags -f %<CR>
-map <C-j> :GtagsCursor<CR>
-map <C-n> :cn<CR>
-map <C-p> :cp<CR>
+map <C-g> :Gtags 
+map <C-m> :Gtags -r 
+map <C-c> :GtagsCursor<CR>
 
 " ##########################################################################################
 " ### C言語の設定
