@@ -1,26 +1,20 @@
+filetype plugin indent off
 " ###############################################################################
 " ### neobundleの設定
 " ###############################################################################
 
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
+    call neobundle#begin(expand('~/.vim/bundle/'))
 endif
-
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-call neobundle#end()
-
-filetype plugin indent on
-
-NeoBundleCheck
 
 
 " ################################################################################
 " ### Plugin
 " ################################################################################
 "
+NeoBundleFetch 'Shougo/neobundle.vim'
+
 " NeoBundle 'Shougo/neocomplcache'
 NeoBundleLazy has('lua') ? 'Shougo/neocomplete.vim' : 'Shougo/neocomplcache',{
     \ "autoload": {"insert":1}
@@ -65,6 +59,9 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'sjl/badwolf'
+
+call neobundle#end()
+filetype plugin indent on
 
 " ################################################################################
 " ### helpの設定
