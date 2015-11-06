@@ -4,7 +4,7 @@
 
 case ${OSTYPE} in
     darwin*)
-        export PATH=/usr/local/bin:/usr/texbin:$PATH
+        export PATH=/usr/local/bin:/usr/texbin:/usr/bin$PATH
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
         export LANG=ja_JP.UTF-8
         ;;
@@ -128,7 +128,7 @@ SPROMPT="%{${fg[white]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
 if which pyenv > /dev/null; then
     eval "$(pyenv init -)";
 fi
-export PYENV_ROOT=/usr/local/var/pyenv
+export PYENV_ROOT=/usr/local/pyenv
 
 if which pyenv-virtualenv > /dev/null; then
     eval "$(pyenv virtualenv-init -)";
