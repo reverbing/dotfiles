@@ -1,4 +1,3 @@
-filetype plugin indent off
 " ###############################################################################
 " ### neobundleの設定
 " ###############################################################################
@@ -6,59 +5,44 @@ filetype plugin indent off
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
     call neobundle#begin(expand('~/.vim/bundle/'))
-endif
-
 
 " ################################################################################
 " ### Plugin
 " ################################################################################
-"
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" NeoBundle 'Shougo/neocomplcache'
-NeoBundleLazy has('lua') ? 'Shougo/neocomplete.vim' : 'Shougo/neocomplcache',{
-    \ "autoload": {"insert":1}
-    \ }
-NeoBundleLazy 'Shougo/unite.vim', {
-    \ "autoload": {
-    \ "commands": ["unite", "UniteWithBufferDir"]
-    \ }}
-NeoBundleLazy 'vim-jp/cpp-vim', {
-            \ 'autoload' : {'filetypes' : 'cpp'}
-            \ }
-NeoBundleLazy 'osyo-manga/vim-marching', {
-            \ 'depends' : ['Shougo/vimproc.vim', 'osyo-manga/vim-reunions'],
-            \ 'autoload' : {'filetypes' : ['c', 'cpp']}
-            \}
-NeoBundle "Shougo/vimproc", {
+    NeoBundleFetch 'Shougo/neobundle.vim'
+    NeoBundleLazy 'Shougo/unite.vim', {
+        \ "autoload": {
+        \ "commands": ["unite", "UniteWithBufferDir"]
+        \ }}
+    NeoBundleLazy has('lua') ? 'Shougo/neocomplete.vim' : 'Shougo/neocomplcache',{
+        \ "autoload": {"insert":1}
+        \ }
+    NeoBundle "Shougo/vimproc", {
         \ "build": {
         \   "windows"   : "make -f make_mingw32.mak",
         \   "cygwin"    : "make -f make_cygwin.mak",
         \   "mac"       : "make -f make_mac.mak",
         \   "unix"      : "make -f make_unix.mak",
         \ }}
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'mattn/calendar-vim'
-NeoBundle 'YankRing.vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'kevinw/pyflakes-vim'
-NeoBundle 'aharisu/vim_goshrepl'
-NeoBundle 'amdt/vim-niji'
-" カラースキーム
-NeoBundle 'tomasr/molokai'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'sjl/badwolf'
+    NeoBundle 'Shougo/neosnippet'
+    NeoBundle 'Shougo/neosnippet-snippets'
+    NeoBundle 'Shougo/neomru.vim'
+    NeoBundle 'ujihisa/unite-colorscheme'
+    NeoBundle 'mattn/calendar-vim'
+    NeoBundle 'itchyny/lightline.vim'
+    NeoBundle 'davidhalter/jedi-vim'
+    NeoBundle 'kevinw/pyflakes-vim'
+    NeoBundle 'scrooloose/nerdcommenter'
+    NeoBundle 'nathanaelkane/vim-indent-guides'
+    NeoBundle 'amdt/vim-niji'
 
-call neobundle#end()
+    " カラースキーム
+    NeoBundle 'tomasr/molokai'
+
+    call neobundle#end()
+endif
+
+
 filetype plugin indent on
 
 " ################################################################################
@@ -101,64 +85,13 @@ nnoremap <S-Right> <C-w>><CR>
 nnoremap <S-Up>    <C-w>-<CR>
 nnoremap <S-Down>  <C-w>+<CR>
 
-
 " ###################################################################################
 " ### カラーリング設定
 " ###################################################################################
-
 set t_Co=256
-" シンタックスハイライト
-syntax on
-" PreprocとFunctionとExceptionの色を設定:148(154,112)
-autocmd Colorscheme * highlight Preproc ctermfg=148
-autocmd Colorscheme * highlight Function ctermfg=148
-autocmd Colorscheme * highlight Exception ctermfg=148
-autocmd Colorscheme * highlight Visual ctermfg=Yellow
-" commentの色を設定:244(210)
-autocmd ColorScheme * highlight Comment ctermfg=244
-" ターミナルでの透過設定をvimに反映
-highlight Normal ctermbg=None
 " カラースキーム
 colorschem molokai
-" :SyntaxInfoでカーソルがある文のカラーリング設定を確認
-function! s:get_syn_id(transparent)
-  let synid = synID(line("."), col("."), 1)
-  if a:transparent
-    return synIDtrans(synid)
-  else
-    return synid
-  endif
-endfunction
-function! s:get_syn_attr(synid)
-  let name = synIDattr(a:synid, "name")
-  let ctermfg = synIDattr(a:synid, "fg", "cterm")
-  let ctermbg = synIDattr(a:synid, "bg", "cterm")
-  let guifg = synIDattr(a:synid, "fg", "gui")
-  let guibg = synIDattr(a:synid, "bg", "gui")
-  return {
-        \ "name": name,
-        \ "ctermfg": ctermfg,
-        \ "ctermbg": ctermbg,
-        \ "guifg": guifg,
-        \ "guibg": guibg}
-endfunction
-function! s:get_syn_info()
-  let baseSyn = s:get_syn_attr(s:get_syn_id(0))
-  echo "name: " . baseSyn.name .
-        \ " ctermfg: " . baseSyn.ctermfg .
-        \ " ctermbg: " . baseSyn.ctermbg .
-        \ " guifg: " . baseSyn.guifg .
-        \ " guibg: " . baseSyn.guibg
-  let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
-  echo "link to"
-  echo "name: " . linkedSyn.name .
-        \ " ctermfg: " . linkedSyn.ctermfg .
-        \ " ctermbg: " . linkedSyn.ctermbg .
-        \ " guifg: " . linkedSyn.guifg .
-        \ " guibg: " . linkedSyn.guibg
-endfunction
-command! SyntaxInfo call s:get_syn_info()
-
+syntax on
 
 " ###################################################################################
 " ### カーソル動作設定
@@ -166,8 +99,6 @@ command! SyntaxInfo call s:get_syn_info()
 "
 " カーソル行の背景色を変える
 set cursorline
-" autocmd WinEnter * setlocal cursorline
-" autocmd WinLeave * setlocal nocursorline
 
 " 文字がない場所にもカーソル移動を可能にする
 " set virtualedit=all
@@ -282,22 +213,6 @@ set wrapscan
 
 
 " ##########################################################################################
-" ### 括弧&クォーテーションの自動補完設定
-" ##########################################################################################
-"
-" inoremap { {}<LEFT>
-" inoremap [ []<LEFT>
-" inoremap ( ()<LEFT>
-" inoremap " ""<LEFT>
-" inoremap ' ''<LEFT>
-" vnoremap { "zdi^V{<C-R>z}<ESC>
-" vnoremap [ "zdi^V[<C-R>z]<ESC>
-" vnoremap ( "zdi^V(<C-R>z)<ESC>
-" vnoremap " "zdi^V"<C-R>z^V"<ESC>
-" vnoremap ' "zdi'<C-R>z'<ESC>
-
-
-" ##########################################################################################
 " ### その他の設定
 " ##########################################################################################
 "
@@ -308,13 +223,11 @@ nnoremap + <C-a>
 " -でカーソル下の数値をデクリメント
 nnoremap - <C-x>
 
-
 " ++++++++++++++++++++++++++++++++ 各種プラグインの設定 ++++++++++++++++++++++++++++++++++++
 "
 " ##########################################################################################
 " ### unite.vimの設定
 " ##########################################################################################
-
 " 起動時にインサートモードで開始
 let g:unite_enable_start_insert = 1
 " バッファ一覧
@@ -339,22 +252,91 @@ endfunction
 
 
 " ##########################################################################################
-" ### VimFilerの設定
+" ### neocomplete & neocomplcacheの設定
+" ##########################################################################################
+"
+if neobundle#is_installed('neocomplete.vim')
+    "neocomplete用設定
+    let s:hooks = neobundle#get_hooks("neocomplete.vim")
+    let g:acp_enableAtStartUp = 0
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_ignore_case = 1
+    let g:neocomplete#enable_smart_case = 1
+    if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+    endif
+    " let g:neocomplete#force_omni_input_patterns.cpp =
+                " \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+    let g:neocomplete#enable_camel_case = 1
+elseif neobundle#is_installed("neocomplcache.vim")
+    "neocomplcache用設定
+    let g:neocomplcache#enable_at_startup = 1
+    let g:neocomplcache#enable_ignore_case = 1
+    let g:neocomplcache#enable_smart_case = 1
+    if !exists('g:neocomplcache_keyword_patterns')
+        let g:neocomplcache_keyword_patterns = {}
+    endif
+    let g:neocomplcache_keyword_patterns._ = '\h\w*'
+    let g:neocomplcache_enable_camel_case_completion = 1
+    let g:neocomplcache_enable_underbar_completion = 1
+endif
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-n>" : "\<S-TAB>"
+
+
+" ##########################################################################################
+" ### neosnippetの設定
 " ##########################################################################################
 
-" 自動起動
-" autocmd VimEnter * VimFiler -split -simple -winwidth=30 -no-quit
-" :e で起動
-" let g:vimfiler_as_default_explorer = 1
-" セーフモードをOffに
-" let g:vimfiler_safe_mode_by_default = 0
+" Plugin key-mappings.
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+" Enable snipMate compatibility feature.
+" let g:neosnippet#enable_snipmate_compatibility = 1
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/neosnippets'
 
 
 " ##########################################################################################
-" ### VimShellの設定
+" ### NERDcommenterの設定
+" ##########################################################################################
+"
+let NERDSpaceDelims = 1
+nmap ,, <Plug>NERDCommenterToggle
+vmap ,, <Plug>NERDCommenterToggle
+
+
+" ##########################################################################################
+" ### jediの設定
 " ##########################################################################################
 
-nnoremap <silent> ,vs :<C-u>VimShell<CR>
+" docstringを非表示に
+autocmd FileType python setlocal completeopt-=preview
+
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#completions_enabled = 0
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+
 
 " ##########################################################################################
 " ### indent-guides.vimの設定
@@ -386,150 +368,11 @@ let g:lightline = {
 
 
 " ##########################################################################################
-" ### YankRingの設定
-" ##########################################################################################
-
-let g:yankring_history_dir = '~/.vim/history'
-let g:yankring_history_file = '.yankring_history'
-
-
-" ##########################################################################################
-" ### NERDcommenterの設定
-" ##########################################################################################
-"
-let NERDSpaceDelims = 1
-nmap ,, <Plug>NERDCommenterToggle
-vmap ,, <Plug>NERDCommenterToggle
-
-
-" ##########################################################################################
-" ### neosnippetの設定
-" ##########################################################################################
-
-" Plugin key-mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-" Enable snipMate compatibility feature.
-" let g:neosnippet#enable_snipmate_compatibility = 1
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/neosnippets'
-
-" ##########################################################################################
-" ### jediの設定
-" ##########################################################################################
-
-" docstringを非表示に
-autocmd FileType python setlocal completeopt-=preview
-
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#completions_enabled = 0
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-
-
-" ##########################################################################################
-" ### neocomplete & neocomplcacheの設定
-" ##########################################################################################
-"
-if neobundle#is_installed('neocomplete.vim')
-    "neocomplete用設定
-    let s:hooks = neobundle#get_hooks("neocomplete.vim")
-    let g:acp_enableAtStartUp = 0
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_ignore_case = 1
-    let g:neocomplete#enable_smart_case = 1
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#force_omni_input_patterns.cpp =
-                \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-    let g:neocomplete#enable_camel_case = 1
-elseif neobundle#is_installed("neocomplcache.vim")
-    "neocomplcache用設定
-    let g:neocomplcache#enable_at_startup = 1
-    let g:neocomplcache#enable_ignore_case = 1
-    let g:neocomplcache#enable_smart_case = 1
-    if !exists('g:neocomplcache_keyword_patterns')
-        let g:neocomplcache_keyword_patterns = {}
-    endif
-    let g:neocomplcache_keyword_patterns._ = '\h\w*'
-    let g:neocomplcache_enable_camel_case_completion = 1
-    let g:neocomplcache_enable_underbar_completion = 1
-endif
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-n>" : "\<S-TAB>"
-
-
-" ##########################################################################################
-" ### marchingの設定
-" ##########################################################################################
-
-let g:marching#clang_command#options = {
-            \ 'cpp' : '-std=gnu++1y'
-            \}
-
-" neocompleteと併用する
-let g:marching_enable_neocomplete = 1
-" 処理のタイミング
-set updatetime=200
-
-
-" ##########################################################################################
 " ### globalの設定
 " ##########################################################################################
 
 map <C-g> :Gtags 
 map <C-c> :GtagsCursor<CR>
-
-" ##########################################################################################
-" ### C言語の設定
-" ##########################################################################################
-"
-" 標準的なC言語のインデントに従う
-set cindent
-
-
-" ##########################################################################################
-" ### C++の設定
-" ##########################################################################################
-
-augroup cpp-path
-    autocmd!
-    autocmd FileType cpp setlocal path=.,/usr/include/,/usr/local/include
-augroup END
-
-
-" ##########################################################################################
-" ### Javaの設定
-" ##########################################################################################
-
-" Java言語の標準のクラス名をハイライト
-let java_highlight_all = 1
-" デバック文のハイライト
-" let java_highlight_debug = 1
-" 余分な空白をハイライト
-let java_space_errors = 1
-" メソッド宣言部をハイライト
-let java_highlight_functions = 1
 
 
 " ##########################################################################################
@@ -558,8 +401,6 @@ let g:neocomplete#keyword_patterns['gosh-repl'] = "[[:alpha:]+*/@$_=.!?-][[:alnu
 autocmd FileType scheme set nocindent
 autocmd FileType scheme set lisp
 autocmd FileType scheme set showmatch
-" <Bslash>g でGaucheファイルを評価し、GoauchREPLバッファを開く
-nnoremap <Leader>g :<C-u>GoshREPLWithBuffer<Enter>
 
 
 " ##########################################################################################
@@ -573,3 +414,4 @@ execute "set rtp+=" . g:opamshare . "/merlin/vimbufsync"
 
 " ocp-indentとの連携
 autocmd FileType ocaml execute ":source " . g:opamshare . "/vim/syntax/ocp-indent.vim"
+
