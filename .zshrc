@@ -125,14 +125,19 @@ SPROMPT="%{${fg[white]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
 #############################################################################################
 ### pyenv-virtualenv
 #############################################################################################
-if which pyenv > /dev/null; then
-    eval "$(pyenv init -)";
-fi
-export PYENV_ROOT=/usr/local/pyenv
+#
+case ${OSTYPE} in
+    darwin*)
+        if which pyenv > /dev/null; then
+            eval "$(pyenv init -)";
+        fi
+        export PYENV_ROOT=/usr/local/pyenv
 
-if which pyenv-virtualenv > /dev/null; then
-    eval "$(pyenv virtualenv-init -)";
-fi
+        if which pyenv-virtualenv > /dev/null; then
+            eval "$(pyenv virtualenv-init -)";
+        fi
+        ;;
+esac
 
 #############################################################################################
 ### OPAM
