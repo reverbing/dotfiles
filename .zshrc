@@ -4,9 +4,11 @@
 
 case ${OSTYPE} in
     darwin*)
-        export PATH=/usr/local/bin:/usr/texbin:/usr/bin$PATH
+        export PATH=/usr/local/bin:/usr/texbin:/usr/bin:/Users/reverbing/Works/activator:$PATH
         export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
         export LANG=ja_JP.UTF-8
+        export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home`
+        export CLASSPATH=.:$JAVA_HOME:~/Dropbox/Program/javaworks/HTMLcrawler/jericho-html-3.4/dist/jericho-html-3.4.jar
         ;;
     linux*)
         export EDITOR=vim
@@ -128,9 +130,10 @@ SPROMPT="%{${fg[white]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
 if which pyenv > /dev/null; then
     eval "$(pyenv init -)";
 fi
-export PYENV_ROOT=/usr/local/pyenv
+export PYENV_ROOT=$HOME/.pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
 
-if which pyenv-virtualenv > /dev/null; then
+if which pyenv-virtualenvnit > /dev/null; then
     eval "$(pyenv virtualenv-init -)";
 fi
 
