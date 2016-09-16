@@ -13,6 +13,8 @@ case ${OSTYPE} in
     linux*)
         export EDITOR=vim
         export LANG=en_US.UTF-8
+        export PATH=/usr/java/jre1.8.0_91/bin:$PATH
+        alias vndl='virsh net-dhcp-leases'
         ;;
 esac
 
@@ -136,7 +138,7 @@ SPROMPT="%{${fg[white]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
 ### pyenv
 #############################################################################################
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:${PYENV_ROOT}/shims$PATH"
+export PATH="$PYENV_ROOT/bin:${PYENV_ROOT}/shims:$PATH"
 eval "$(pyenv init -)"
 
 
